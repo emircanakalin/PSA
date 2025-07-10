@@ -1,6 +1,5 @@
 <h1 align="center">
   Proactive Security and Compliance Assistant
-  ![GitHub Logo](./images/github-logo.png)
 </h1>
 <h3 align="center">(Proaktif Güvenlik ve Uyumluluk Asistanı)</h3>
 
