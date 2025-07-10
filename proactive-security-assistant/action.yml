@@ -1,0 +1,51 @@
+# proactive-security-assistant/action.yml
+name: 'Proactive Security and Compliance Assistant'
+description: 'A GitHub Action that scans code for sensitive data, license non-compliance, and other security anti-patterns.'
+author: 'Kilo Code'
+
+inputs:
+  repo_path:
+    description: 'The path to the repository to be scanned.'
+    required: true
+    default: '.'
+  config_path:
+    description: 'The path to the configuration file.'
+    required: false
+    default: '.github/security-config.yml'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Node.js Environment
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Setup Python Environment
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install Tools and Dependencies
+      shell: bash
+      run: |
+        pip install -r ${{ github.action_path }}/requirements.txt
+        npm install -g license-checker-js
+    
+    - name: Install Target Repo Python Dependencies (if any)
+      shell: bash
+      run: |
+        if [ -f "${{ inputs.repo_path }}/requirements.txt" ]; then
+          pip install -r ${{ inputs.repo_path }}/requirements.txt
+        fi
+
+    - name: Run Security Scan
+      shell: bash
+      run: python ${{ github.action_path }}/src/main.py
+      env:
+        INPUT_REPO_PATH: ${{ inputs.repo_path }}
+        INPUT_CONFIG_PATH: ${{ inputs.config_path }}
+
+branding:
+  icon: 'shield'
+  color: 'red'

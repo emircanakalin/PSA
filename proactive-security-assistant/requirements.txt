@@ -1,0 +1,5 @@
+# proactive-security-assistant/requirements.txt
+PyYAML==6.0.1
+pip-licenses==4.5.0
+checkov==3.2.100 # IaC Güvenlik Taraması için
+# license-checker-js (npm üzerinden) gibi diğer araçlar Action'da ayrıca kurulacaktır.

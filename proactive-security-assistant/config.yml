@@ -1,0 +1,50 @@
+# proactive-security-assistant/config.yml
+# This file contains the rules for the Proactive Security Assistant.
+
+# 1. Sensitive Data Leakage Detection
+# The regex patterns defined here will be searched for within the code.
+# Finding a match can cause the PR to be blocked.
+sensitive_data_patterns:
+  - '(?i)sk_live_[0-9a-zA-Z]{24}' # Stripe Live API Key
+  - '(?i)ghp_[0-9a-zA-Z]{36}' # GitHub Personal Access Token
+  - '(?i)-----BEGIN RSA PRIVATE KEY-----' # RSA Private Key
+  - '(?i)-----BEGIN OPENSSH PRIVATE KEY-----' # OpenSSH Private Key
+  - '(?i)xoxb-[0-9a-zA-Z-]{20,}' # Slack Bot Token Pattern
+  - '(?i)AKIA[0-9A-Z]{16}' # AWS Access Key ID
+  - '(?i)[A-Za-z0-9/+=]{40}' # AWS Secret Access Key (Generic, might have false positives)
+  - '(?i)AIza[0-9A-Za-z\\-_]{35}' # Google API Key
+  - '(?i)key-[0-9a-zA-Z]{32}' # Mailgun API Key
+
+# 2. License Compliance Auditing
+# The licenses of project dependencies will be compared against this list.
+# If a license not on this list is found, the build will fail.
+allowed_licenses:
+  - 'MIT'
+  - 'Apache-2.0'
+  - 'ISC'
+  - 'BSD-2-Clause'
+  - 'BSD-3-Clause'
+  - 'Unlicense'
+  - 'CC0-1.0'
+
+# 3. Dangerous Function Usage
+# A warning is issued when the use of these functions is detected in the code.
+dangerous_functions:
+  python:
+    - 'eval'
+    - 'exec'
+    - 'pickle.loads'
+    - 'subprocess.call'
+    - 'subprocess.run' # Usage with shell=True is dangerous, a general warning can be given.
+  javascript:
+    - 'eval'
+    - 'dangerouslySetInnerHTML'
+    - 'Function' # e.g., new Function(...)
+ php:
+   - 'exec'
+   - 'shell_exec'
+   - 'system'
+   - 'passthru'
+   - 'eval'
+ go:
+   - 'os/exec.Command' # Using this can be dangerous if input is not sanitized
