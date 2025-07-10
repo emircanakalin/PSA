@@ -1,6 +1,5 @@
-# PSA
 <h1 align="center">
-  <img src="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/brands/github.svg" alt="GitHub Logo" width="40" height="40" style="vertical-align:middle; filter: invert(1);">
+  <img src="https://raw.githubusercontent.com/gilbarbara/logos/main/logos/github-wordmark.svg" alt="GitHub Logo" width="120" style="vertical-align:middle; filter: invert(1);">
   Proactive Security and Compliance Assistant
 </h1>
 <h3 align="center">(Proaktif Güvenlik ve Uyumluluk Asistanı)</h3>
