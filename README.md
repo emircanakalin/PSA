@@ -1,4 +1,7 @@
 <h1 align="center">
+<p align="center">
+  <img src="assets/GitHub_Logo_White.png" alt="GitHub Logo" width="150"/>
+</p>
  
   Proactive Security and Compliance Assistant
 </h1>
